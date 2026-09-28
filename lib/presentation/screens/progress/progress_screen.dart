@@ -2,11 +2,70 @@ import 'package:flutter/material.dart';
 
 class ProgressScreen extends StatelessWidget {
   static const name = 'progress_screen';
-  
+
   const new({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: Text('Progress Indicator')),
+      body: _ProgressView(),
+    );
+  }
+}
+
+class _ProgressView extends StatelessWidget {
+  const new();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(height: 30),
+          Text('Ciruclar progress indicator'),
+          SizedBox(height: 10),
+          CircularProgressIndicator(
+            strokeWidth: 2,
+            backgroundColor: Colors.black45,
+          ),
+
+          SizedBox(height: 20),
+          Text('Ciruclar y Linear controlado'),
+          SizedBox(height: 10),
+          _ControlledProgressIndicator(),
+        ],
+      ),
+    );
+  }
+}
+
+class _ControlledProgressIndicator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Stream.periodic(const Duration(milliseconds: 300), (value) {
+        return (value * 2) / 100;
+      }).takeWhile((value) => value < 100),
+      builder: (context, snapshot) {
+        final progressValue = snapshot.data ?? 0;
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(
+                value: progressValue,
+                strokeWidth: 2,
+                backgroundColor: Colors.black12,
+              ),
+              SizedBox(width: 20),
+              Expanded(child: LinearProgressIndicator(value: progressValue)),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

@@ -1,9 +1,17 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
+# ==============================================================
+# .gitignore - Flutter (solo Android + iOS)
+# ==============================================================
+
+# --------------------------------------------------------------
+# SO y herramientas varias
+# --------------------------------------------------------------
 .DS_Store
+Thumbs.db
+*.log
+*.swp
+*~
+*.class
+*.pyc
 .atom/
 .build/
 .buildlog/
@@ -12,37 +20,123 @@
 .swiftpm/
 migrate_working_dir/
 
-# IntelliJ related
+# --------------------------------------------------------------
+# IDEs
+# --------------------------------------------------------------
+.idea/
 *.iml
 *.ipr
 *.iws
-.idea/
+# VS Code: se versiona solo la config compartida, no la personal
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# --------------------------------------------------------------
+# Flutter / Dart / Pub
+# --------------------------------------------------------------
 .dart_tool/
+.flutter-plugins
 .flutter-plugins-dependencies
+.packages
 .pub-cache/
 .pub/
 /build/
 /coverage/
+**/doc/api/
+.widget_preview/
 
-# Symbolication related
+# FVM (gestor de versiones de Flutter), si lo usas
+.fvm/flutter_sdk
+# .fvm/fvm_config.json y .fvmrc SÍ se versionan
+
+# Símbolos y ofuscación
 app.*.symbols
-
-# Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Se versionan (NO ignorar): pubspec.lock, Podfile.lock, analysis_options.yaml
 
-# Widget Preview related
-.widget_preview/
+# Código generado (build_runner). Opcional: descomenta solo si lo
+# generas en CI y no lo quieres en el repositorio
+# *.g.dart
+# *.freezed.dart
+# *.mocks.dart
+
+# --------------------------------------------------------------
+# Secretos y configuración local (NUNCA subir)
+# --------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.env
+secrets.json
+config.local.*
+
+# --------------------------------------------------------------
+# Android
+# --------------------------------------------------------------
+/android/.gradle/
+/android/.kotlin/
+/android/build/
+/android/app/build/
+/android/app/debug/
+/android/app/profile/
+/android/app/release/
+/android/app/.cxx/
+/android/captures/
+/android/local.properties
+/android/gradlew
+/android/gradlew.bat
+/android/gradle/wrapper/gradle-wrapper.jar
+**/GeneratedPluginRegistrant.java
+*.hprof
+
+# Firmado Android (NUNCA subir)
+/android/key.properties
+*.jks
+*.keystore
+
+# --------------------------------------------------------------
+# iOS
+# --------------------------------------------------------------
+/ios/build/
+/ios/.generated/
+/ios/Pods/
+/ios/.symlinks/
+/ios/Flutter/ephemeral/
+/ios/Flutter/.last_build_id
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/app.flx
+/ios/Flutter/app.zip
+/ios/Flutter/flutter_assets/
+/ios/Flutter/flutter_export_environment.sh
+/ios/ServiceDefinitions.json
+/ios/Runner/GeneratedPluginRegistrant.*
+**/DerivedData/
+**/xcuserdata/
+*.xcuserstate
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+*.perspectivev3
+**/Icon?
+
+# Firmado iOS (NUNCA subir)
+*.p12
+*.p8
+*.cer
+*.certSigningRequest
+*.mobileprovision
+*.provisionprofile
+
+# Fastlane (si lo usas)
+/ios/fastlane/report.xml
+/ios/fastlane/Preview.html
+/ios/fastlane/screenshots/
+/ios/fastlane/test_output/
+/android/fastlane/report.xml

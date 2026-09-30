@@ -50,7 +50,7 @@ Widgets App es una aplicación desarrollada en Flutter que reúne diferentes eje
 ### Vista previa
 
 <p align="center">
-  <img src="assets/banner-screenshots.png" alt="WidgetApp Screenshots" width="100%"/>
+  <img src="screenshots/banner-screenshots.png" alt="WidgetApp Screenshots" width="100%"/>
 </p>
 
 ---

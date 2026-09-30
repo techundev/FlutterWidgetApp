@@ -3,19 +3,34 @@ import 'package:go_router/go_router.dart';
 import 'package:widgets_app/config/menu/menu_items.dart';
 import 'package:widgets_app/presentation/widgets/side_menu.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String name = 'home_screen';
 
   const new({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Future<void> _onMenuItemSelected(String link) async {
+    _scaffoldKey.currentState?.closeDrawer();
+
+    await Future.delayed(const Duration(milliseconds: 250));
+
+    if (!mounted) return;
+    context.push(link);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(title: Text('Flutter + Material 3')),
+      key: _scaffoldKey,
+      appBar: AppBar(title: const Text('Flutter + Material 3')),
       body: _HomeView(),
-      drawer: SideMenu(scaffoldKey: scaffoldKey,),
+      drawer: SideMenu(onItemSelected: _onMenuItemSelected),
     );
   }
 }
